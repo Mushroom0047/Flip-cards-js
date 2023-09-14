@@ -1,15 +1,15 @@
-body { font-family: sans-serif; }
+
 .cards__wrap{
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
+    flex-flow: row nowrap;
+    height: 60vh;
+    justify-content: space-evenly;
 }
 
 .scene {
-  width: 173px;
-  height: 260px;
-  border: 1px solid #CCC;
-  margin: 40px 0;
+  width: 249.8px;
+  height: 348px;
+  margin: 50px 0;
   perspective: 600px;
 }
 
@@ -20,33 +20,130 @@ body { font-family: sans-serif; }
   transform-style: preserve-3d;
   cursor: pointer;
   position: relative;
+  border-radius: 36px;
 }
+
 
 .card.is-flipped {
   transform: rotateY(180deg);
 }
+.card.is-shuffle{
+  animation: onTop 1.5s ease 1;
+}
 
+
+/* vista ilustraciones de cartas */
 .card__face {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  line-height: 260px;
-  color: #000;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
+  margin: 0 auto;
+  width: 250px;
+  height: 348px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transition: 0.3s;
 }
+
 .card__face--back1, .card__face--back2, .card__face--back3 {
-  background-repeat: no-repeat;
-  background-size: contain;
   transform: rotateY(180deg);
 }
-
-.div__botones, .div__btn__revolver{
+:is(.card__face--back1,.card__face--back2, .card__face--back3) img{
+  border: solid 1px #bebebe;
+  border-radius: 35px;
+}
+.div__botones{
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column;
     justify-content: space-around;
+    gap: 5px;
+    margin-top: 35px;
 }
 
+.div__botones button{
+  width: 100%;
+}
+
+ .div__btn__revolver {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 20px;
+ }
+
+.btn__revolver__cartas {
+  background-color:rgb(11, 11, 11);
+  color: white;
+  -webkit-box-shadow: 2px 10px 14px -11px rgba(0,0,0,0.45);
+  -moz-box-shadow: 2px 10px 14px -11px rgba(0,0,0,0.45);
+  box-shadow: 2px 10px 14px -11px rgba(0,0,0,0.45);
+  transition: 0.3s;
+}
+.btn__revolver__cartas:hover {
+  background-color: #FFB500;
+  color: black;
+  transition: .3s;
+  cursor: pointer;
+}
+
+
+/* CSS */
+.button-50 {
+  appearance: button;
+  background-color: #000;
+  background-image: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  padding: 12px 40px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-50:focus {
+  text-decoration: none;
+}
+
+.button-50:hover {
+  text-decoration: none;
+}
+
+.button-50:active {
+  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+  outline: 0;
+}
+
+.button-50:not([disabled]):active {
+  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-50 {
+    padding: 12px 50px;
+  }
+}
+
+@keyframes onTop {
+  50% {
+    transform: translateY(-500px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+  
+}
