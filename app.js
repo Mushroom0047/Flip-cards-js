@@ -85,12 +85,23 @@ const imagenes3 = [
   "http://cartasporlainclusion.com/wp-content/uploads/2023/07/Tengo-poca-confianza@2x.webp"
 ];
 
-    const image = document.querySelector(".card--1");
+
+ const btnVerCarta1 = document.querySelector('.btn__card--1--showCard');
+ const btnVerCarta2 = document.querySelector('.btn__card--2--showCard');
+ const btnVerCarta3 = document.querySelector('.btn__card--3--showCard');
+
+
+  const btnCambiarCarta1 = document.querySelector('.btn__card--1--ChangeCard');
+  const btnCambiarCarta2 = document.querySelector('.btn__card--2--ChangeCard');
+  const btnCambiarCarta3 = document.querySelector('.btn__card--3--ChangeCard');
+
 
     //Funcion para saber que carta debemos voltear
     let cards = document.getElementsByClassName('card');
     for (let i = 0; i < cards.length; i++) {
-      cards[i].addEventListener("click", () => { cards[i].classList.toggle('is-flipped'); })
+      cards[i].addEventListener("click", () => { 
+        cards[i].classList.toggle('is-flipped');    
+      })
     };
     
 
@@ -109,57 +120,69 @@ const imagenes3 = [
           document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
       };
     });
-    function shuffleEffect(className){
-      setTimeout(function() {
+    function shuffleEffect(className, time){
+      setTimeout(()=> {
         document.querySelector(className).classList.add('is-shuffle');
-      }, 500);
-      setTimeout(function() {
+      }, time);
+      setTimeout(()=> {
         document.querySelector(className).classList.remove('is-shuffle');
       }, 3000);
     }
 
     
-    //Funcionalidad del boton cambiar carta
-    const btnCambiarCarta1 = document.querySelector('.btn__card--1--ChangeCard');
-    const btnCambiarCarta2 = document.querySelector('.btn__card--2--ChangeCard');
-    const btnCambiarCarta3 = document.querySelector('.btn__card--3--ChangeCard');
-    
+   
+      //Funcionalidad del boton cambiar carta
     btnCambiarCarta1.addEventListener('click', () => {
       let indiceArr = obtenerElementoAleatorio(imagenes1);
+      var time = 0;
       if (document.querySelector('.card--1').classList.contains("is-flipped")) {
         document.querySelector('.card--1').classList.remove('is-flipped');
-        shuffleEffect('.card--1');
+        time = 500;
+      }else{
+        time = 100;
       }
-      document.querySelector('.card__face--back1 img').src = `${indiceArr}`;
+      shuffleEffect('.card--1', time);
+      setTimeout(()=> {
+        document.querySelector('.card__face--back1 img').src = `${indiceArr}`;
+      }, 200);
+      
     })
 
 
     btnCambiarCarta2.addEventListener('click', () => {
       let indiceArr = obtenerElementoAleatorio(imagenes2);
+      var time = 0;
       if (document.querySelector('.card--2').classList.contains("is-flipped")) {
         document.querySelector('.card--2').classList.remove('is-flipped');
-        shuffleEffect('.card--2');
+        time = 500;
+      }else{
+        time = 100;
       }
-      document.querySelector('.card__face--back2 img').src = `${indiceArr}`;
+      shuffleEffect('.card--2', time);
+      setTimeout(()=> {
+        document.querySelector('.card__face--back2 img').src = `${indiceArr}`;
+      }, 200);
+      
     })
     
     btnCambiarCarta3.addEventListener('click', () => {
       let indiceArr = obtenerElementoAleatorio(imagenes3);
+      var time = 0;
       if (document.querySelector('.card--3').classList.contains("is-flipped")) {
         document.querySelector('.card--3').classList.remove('is-flipped');
-        shuffleEffect('.card--3');
+        time = 500;
+      }else{
+        time = 100;
       }
-      document.querySelector('.card__face--bac3k img').src = `${indiceArr}`;
+      shuffleEffect('.card--3', time);
+      setTimeout(()=> {
+        document.querySelector('.card__face--bac3k img').src = `${indiceArr}`;
+      }, 200);
+      
     })
     
-    
-  
-    //Funcionalidad del boton mostrar carta
-    const btnVerCarta1 = document.querySelector('.btn__card--1--showCard');
-    const btnVerCarta2 = document.querySelector('.btn__card--2--showCard');
-    const btnVerCarta3 = document.querySelector('.btn__card--3--showCard');
-    
-    btnVerCarta1.addEventListener('click', (e) => {
+     //Funcionalidad del boton mostrar carta
+    btnVerCarta1.addEventListener('click', () => {
       document.querySelector('.card--1').classList.toggle('is-flipped');
       btnVerCarta1.textContent = (btnVerCarta1.textContent == "Ver carta")? btnVerCarta1.textContent = "Ocultar carta": btnVerCarta1.textContent = "Ver carta";
     })
@@ -172,19 +195,22 @@ const imagenes3 = [
         btnVerCarta3.textContent = (btnVerCarta3.textContent == "Ver carta")? btnVerCarta3.textContent = "Ocultar carta": btnVerCarta3.textContent = "Ver carta";
     })
 
-
-
     //Revolver TODAS las cartas
     let botonRevolver = document.querySelector('.btn__revolver__cartas');
     botonRevolver.addEventListener('click', () => {
       for (let i = 0; i < cards.length; i++) {
         let indiceArr = obtenerElementoAleatorio(arrImagesArray[i]);
-        
+        var time = 0;
         if (document.querySelector(`.card--${i+1}`).classList.contains("is-flipped")) {
           document.querySelector(`.card--${i+1}`).classList.remove('is-flipped');
-          shuffleEffect(`.card--${i+1}`);    
+          time = 500;
+        }else{
+          time = 100;
         }
-        document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
+        shuffleEffect(`.card--${i+1}`, time);
+        setTimeout(()=> {
+          document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
+        }, 200);            
       };
     });
 
