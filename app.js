@@ -214,5 +214,46 @@ const imagenes3 = [
       };
     });
 
+// Obtiene una referencia al div contenedor
+const divBtnOptions = document.querySelector('.div__btn__options');
+
+const scenes = {
+  'btn-que': document.querySelector(".scene--card1"),
+  'btn-donde': document.querySelector(".scene--card2"),
+  'btn-barrera': document.querySelector(".scene--card3"),
+};
+
+divBtnOptions.addEventListener('click', (e) => {
+  if (e.target && e.target.matches('button')) {
+    const buttonId = e.target.classList[1];
     
+    // Oculta todas las escenas
+    Object.values(scenes).forEach(scene => {
+      scene.classList.add("hide-scene");
+    });
     
+    // Muestra la escena correspondiente al botón presionado
+    scenes[buttonId].classList.remove("hide-scene");
+  }
+});
+
+    // Define la media query que deseas utilizar
+const mediaQuery = window.matchMedia('(min-width: 401px) and (max-width: 999px)');
+
+// Función para manejar los cambios en la media query
+const handleMediaQuery = (mediaQuery) => {
+  if (mediaQuery.matches) {
+    document.querySelector(".scene--card2").classList.add('hide-scene');
+    scene3 = document.querySelector(".scene--card3").classList.add('hide-scene');
+  } else {
+    document.querySelector(".scene--card2").classList.add('hide-scene');
+    scene3 = document.querySelector(".scene--card3").classList.add('hide-scene');
+  }
+};
+
+// Agrega un controlador de eventos para escuchar cambios en la media query
+mediaQuery.addEventListener('change', handleMediaQuery);
+
+
+// Llama a la función inicialmente para establecer el estado correcto
+handleMediaQuery(mediaQuery);
