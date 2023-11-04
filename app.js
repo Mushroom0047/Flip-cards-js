@@ -28,7 +28,7 @@ const imagenes1 = [
 ];
 
 const imagenes2 = [
-"http://cartasporlainclusion.com/wp-content/uploads/2023/07/Bar@2x.webp",
+  "http://cartasporlainclusion.com/wp-content/uploads/2023/07/Bar@2x.webp",
   "http://cartasporlainclusion.com/wp-content/uploads/2023/07/Bosque-@2x.webp",
   "http://cartasporlainclusion.com/wp-content/uploads/2023/07/Calle@2x.webp",
   "http://cartasporlainclusion.com/wp-content/uploads/2023/07/Centro-cultural@2x.webp",
@@ -86,144 +86,145 @@ const imagenes3 = [
 ];
 
 
- const btnVerCarta1 = document.querySelector('.btn__card--1--showCard');
- const btnVerCarta2 = document.querySelector('.btn__card--2--showCard');
- const btnVerCarta3 = document.querySelector('.btn__card--3--showCard');
+const btnVerCarta1 = document.querySelector('.btn__card--1--showCard');
+const btnVerCarta2 = document.querySelector('.btn__card--2--showCard');
+const btnVerCarta3 = document.querySelector('.btn__card--3--showCard');
 
 
-  const btnCambiarCarta1 = document.querySelector('.btn__card--1--ChangeCard');
-  const btnCambiarCarta2 = document.querySelector('.btn__card--2--ChangeCard');
-  const btnCambiarCarta3 = document.querySelector('.btn__card--3--ChangeCard');
+const btnCambiarCarta1 = document.querySelector('.btn__card--1--ChangeCard');
+const btnCambiarCarta2 = document.querySelector('.btn__card--2--ChangeCard');
+const btnCambiarCarta3 = document.querySelector('.btn__card--3--ChangeCard');
+
+const cardFaces = document.querySelectorAll(".card__face");
 
 
-    //Funcion para saber que carta debemos voltear
-    let cards = document.getElementsByClassName('card');
-    for (let i = 0; i < cards.length; i++) {
-      cards[i].addEventListener("click", () => { 
-        cards[i].classList.toggle('is-flipped');
-        let index = '.btn__card--'+[i+1]+'--showCard';
-        let btnText = document.querySelector(index);
-        btnText.textContent = (btnText.textContent === "Ver carta")? btnText.textContent = "Ocultar carta": btnText.textContent = "Ver carta"; 
-      })
-    };
-    
+//Funcion para saber que carta debemos voltear
+let cards = document.getElementsByClassName('card');
+for (let i = 0; i < cards.length; i++) {
+  cards[i].addEventListener("click", () => {
+    cards[i].classList.toggle('is-flipped');
+    let index = '.btn__card--' + [i + 1] + '--showCard';
+    let btnText = document.querySelector(index);
+    btnText.textContent = (btnText.textContent === "Ver carta") ? btnText.textContent = "Ocultar carta" : btnText.textContent = "Ver carta";
+  })
+};
 
-    const arrImagesArray = [imagenes1, imagenes2, imagenes3];
+const arrImagesArray = [imagenes1, imagenes2, imagenes3];
 
-    //Funcion para obtener el indice de un array de manera aleatoria
-    function obtenerElementoAleatorio(array) {
-      const indiceAleatorio = Math.floor(Math.random() * array.length);
-      return array[indiceAleatorio];
+//Funcion para obtener el indice de un array de manera aleatoria
+function obtenerElementoAleatorio(array) {
+  const indiceAleatorio = Math.floor(Math.random() * array.length);
+  return array[indiceAleatorio];
+}
+
+//Cuando se cargue el sitio se ejecuta esta funcion | asignar imagen al back1
+window.addEventListener("load", () => {
+  for (let i = 0; i < cards.length; i++) {
+    let indiceArr = obtenerElementoAleatorio(arrImagesArray[i]);
+    document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
+  };
+});
+function shuffleEffect(className, time, btn, txtCambiando, txtBtn) {
+  setTimeout(() => {
+    document.querySelector(className).classList.add('is-shuffle');
+    btn.textContent = txtCambiando;
+  }, time);
+  setTimeout(() => {
+    document.querySelector(className).classList.remove('is-shuffle');
+    btn.textContent = txtBtn;
+  }, 2000);
+}
+
+//Funcionalidad del boton cambiar carta
+btnCambiarCarta1.addEventListener('click', () => {
+  btnVerCarta1.textContent = "Ver carta";
+  let indiceArr = obtenerElementoAleatorio(imagenes1);
+  var time = 0;
+  if (document.querySelector('.card--1').classList.contains("is-flipped")) {
+    document.querySelector('.card--1').classList.remove('is-flipped');
+    time = 500;
+  } else {
+    time = 100;
+  }
+  shuffleEffect('.card--1', time, btnCambiarCarta1,'Cambiando...', 'Cambiar carta');
+  setTimeout(() => {
+    document.querySelector('.card__face--back1 img').src = `${indiceArr}`;
+  }, 200);
+
+})
+
+
+btnCambiarCarta2.addEventListener('click', () => {
+  btnVerCarta2.textContent = "Ver carta";
+  let indiceArr = obtenerElementoAleatorio(imagenes2);
+  var time = 0;
+  if (document.querySelector('.card--2').classList.contains("is-flipped")) {
+    document.querySelector('.card--2').classList.remove('is-flipped');
+    time = 500;
+  } else {
+    time = 100;
+  }
+  shuffleEffect('.card--2', time, btnCambiarCarta2, 'Cambiando...', 'Cambiar carta');
+  setTimeout(() => {
+    document.querySelector('.card__face--back2 img').src = `${indiceArr}`;
+  }, 200);
+
+})
+
+btnCambiarCarta3.addEventListener('click', () => {
+  btnVerCarta3.textContent = "Ver carta";
+  let indiceArr = obtenerElementoAleatorio(imagenes3);
+  var time = 0;
+  if (document.querySelector('.card--3').classList.contains("is-flipped")) {
+    document.querySelector('.card--3').classList.remove('is-flipped');
+    time = 500;
+  } else {
+    time = 100;
+  }
+  shuffleEffect('.card--3', time, btnCambiarCarta3,'Cambiando...',  'Cambiar carta');
+  setTimeout(() => {
+    document.querySelector('.card__face--back3 img').src = `${indiceArr}`;
+  }, 200);
+
+})
+
+//Funcionalidad del boton mostrar carta
+btnVerCarta1.addEventListener('click', () => {
+  document.querySelector('.card--1').classList.toggle('is-flipped');
+  btnVerCarta1.textContent = (btnVerCarta1.textContent === "Ver carta") ? btnVerCarta1.textContent = "Ocultar carta" : btnVerCarta1.textContent = "Ver carta";
+})
+btnVerCarta2.addEventListener('click', () => {
+  document.querySelector('.card--2').classList.toggle('is-flipped');
+  btnVerCarta2.textContent = (btnVerCarta2.textContent === "Ver carta") ? btnVerCarta2.textContent = "Ocultar carta" : btnVerCarta2.textContent = "Ver carta";
+})
+btnVerCarta3.addEventListener('click', () => {
+  document.querySelector('.card--3').classList.toggle('is-flipped');
+  btnVerCarta3.textContent = (btnVerCarta3.textContent === "Ver carta") ? btnVerCarta3.textContent = "Ocultar carta" : btnVerCarta3.textContent = "Ver carta";
+})
+
+//Revolver TODAS las cartas
+let botonRevolver = document.querySelector('.btn__revolver__cartas');
+botonRevolver.addEventListener('click', () => {
+  //cambiar texto de botones
+  btnVerCarta1.textContent = "Ver carta";
+  btnVerCarta2.textContent = "Ver carta";
+  btnVerCarta3.textContent = "Ver carta";
+
+  for (let i = 0; i < cards.length; i++) {
+    let indiceArr = obtenerElementoAleatorio(arrImagesArray[i]);
+    var time = 0;
+    if (document.querySelector(`.card--${i + 1}`).classList.contains("is-flipped")) {
+      document.querySelector(`.card--${i + 1}`).classList.remove('is-flipped');
+      time = 500;
+    } else {
+      time = 100;
     }
-    
-    //Cuando se cargue el sitio se ejecuta esta funcion | asignar imagen al back1
-    window.addEventListener("load", () => {
-      for (let i = 0; i < cards.length; i++) {        
-          let indiceArr = obtenerElementoAleatorio(arrImagesArray[i]);      
-          document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
-      };
-    });
-    function shuffleEffect(className, time){
-      setTimeout(()=> {
-        document.querySelector(className).classList.add('is-shuffle');
-      }, time);
-      setTimeout(()=> {
-        document.querySelector(className).classList.remove('is-shuffle');
-      }, 3000);
-    }
-
-    
-   
-      //Funcionalidad del boton cambiar carta
-    btnCambiarCarta1.addEventListener('click', () => {
-      btnVerCarta1.textContent = "Ver carta";
-      let indiceArr = obtenerElementoAleatorio(imagenes1);
-      var time = 0;
-      if (document.querySelector('.card--1').classList.contains("is-flipped")) {
-        document.querySelector('.card--1').classList.remove('is-flipped');
-        time = 500;
-      }else{
-        time = 100;
-      }
-      shuffleEffect('.card--1', time);
-      setTimeout(()=> {
-        document.querySelector('.card__face--back1 img').src = `${indiceArr}`;
-      }, 200);
-      
-    })
-
-
-    btnCambiarCarta2.addEventListener('click', () => {
-      btnVerCarta2.textContent = "Ver carta";
-      let indiceArr = obtenerElementoAleatorio(imagenes2);
-      var time = 0;
-      if (document.querySelector('.card--2').classList.contains("is-flipped")) {
-        document.querySelector('.card--2').classList.remove('is-flipped');
-        time = 500;
-      }else{
-        time = 100;
-      }
-      shuffleEffect('.card--2', time);
-      setTimeout(()=> {
-        document.querySelector('.card__face--back2 img').src = `${indiceArr}`;
-      }, 200);
-      
-    })
-    
-    btnCambiarCarta3.addEventListener('click', () => {
-      btnVerCarta3.textContent = "Ver carta";
-      let indiceArr = obtenerElementoAleatorio(imagenes3);
-      var time = 0;
-      if (document.querySelector('.card--3').classList.contains("is-flipped")) {
-        document.querySelector('.card--3').classList.remove('is-flipped');
-        time = 500;
-      }else{
-        time = 100;
-      }
-      shuffleEffect('.card--3', time);
-      setTimeout(()=> {
-        document.querySelector('.card__face--back3 img').src = `${indiceArr}`;
-      }, 200);
-      
-    })
-    
-     //Funcionalidad del boton mostrar carta
-    btnVerCarta1.addEventListener('click', () => {
-      document.querySelector('.card--1').classList.toggle('is-flipped');
-      btnVerCarta1.textContent = (btnVerCarta1.textContent === "Ver carta")? btnVerCarta1.textContent = "Ocultar carta": btnVerCarta1.textContent = "Ver carta";
-    })
-    btnVerCarta2.addEventListener('click', () => {
-      document.querySelector('.card--2').classList.toggle('is-flipped');
-      btnVerCarta2.textContent = (btnVerCarta2.textContent === "Ver carta")? btnVerCarta2.textContent = "Ocultar carta": btnVerCarta2.textContent = "Ver carta";
-    })
-    btnVerCarta3.addEventListener('click', () => {
-        document.querySelector('.card--3').classList.toggle('is-flipped');
-        btnVerCarta3.textContent = (btnVerCarta3.textContent === "Ver carta")? btnVerCarta3.textContent = "Ocultar carta": btnVerCarta3.textContent = "Ver carta";
-    })
-
-    //Revolver TODAS las cartas
-    let botonRevolver = document.querySelector('.btn__revolver__cartas');
-    botonRevolver.addEventListener('click', () => {
-      //cambiar texto de botones
-      btnVerCarta1.textContent = "Ver carta";
-      btnVerCarta2.textContent = "Ver carta";
-      btnVerCarta3.textContent = "Ver carta";
-
-      for (let i = 0; i < cards.length; i++) {
-        let indiceArr = obtenerElementoAleatorio(arrImagesArray[i]);
-        var time = 0;
-        if (document.querySelector(`.card--${i+1}`).classList.contains("is-flipped")) {
-          document.querySelector(`.card--${i+1}`).classList.remove('is-flipped');
-          time = 500;
-        }else{
-          time = 100;
-        }
-        shuffleEffect(`.card--${i+1}`, time);
-        setTimeout(()=> {
-          document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
-        }, 200);            
-      };
-    });
+    shuffleEffect(`.card--${i + 1}`, time, botonRevolver,'Revolviendo...',  'Revolver todas las Cartas');
+    setTimeout(() => {
+      document.querySelector(`.card__face--back${i + 1} img`).src = `${indiceArr}`;
+    }, 200);
+  };
+});
 
 // Obtiene una referencia al div contenedor
 const divBtnOptions = document.querySelector('.div__btn__options');
@@ -237,25 +238,26 @@ const scenes = {
 divBtnOptions.addEventListener('click', (e) => {
   if (e.target && e.target.matches('button')) {
     const buttonId = e.target.classList[1];
-    
+
     // Oculta todas las escenas
     Object.values(scenes).forEach(scene => {
       scene.classList.add("hide-scene");
     });
-    
+
     // Muestra la escena correspondiente al botón presionado
     scenes[buttonId].classList.remove("hide-scene");
   }
 });
 
-    // Define la media query que deseas utilizar
-const mediaQuery = window.matchMedia('(min-width: 401px) and (max-width: 999px)');
+// Define la media query que deseas utilizar
+const mediaQuery = window.matchMedia('(min-width: 350px) and (max-width: 999px)');
 
 // Función para manejar los cambios en la media query
 const handleMediaQuery = (mediaQuery) => {
-  if (mediaQuery.matches) {    
+  if (mediaQuery.matches) {
     document.querySelector(".scene--card2").classList.add('hide-scene');
     document.querySelector(".scene--card3").classList.add('hide-scene');
+
   } else {
     document.querySelector(".scene--card2").classList.remove('hide-scene');
     document.querySelector(".scene--card3").classList.remove('hide-scene');
@@ -268,3 +270,19 @@ mediaQuery.addEventListener('change', handleMediaQuery);
 
 // Llama a la función inicialmente para establecer el estado correcto
 handleMediaQuery(mediaQuery);
+
+//Quitar efecto tilt
+function disableTiltEffect() {
+  if (window.innerWidth <= 350) { // Puedes ajustar el valor 768 según tus necesidades
+    cardFaces.forEach((cardFace) => {
+      cardFace.removeAttribute("data-tilt");
+      cardFace.removeAttribute("data-tilt-glare");
+      cardFace.removeAttribute("data-tilt-max-glare");
+      cardFace.removeAttribute("data-tilt-scale");
+    });
+  }
+}
+
+// Ejecuta la función al cargar la página y cuando cambie el tamaño de la ventana
+window.addEventListener("load", disableTiltEffect);
+window.addEventListener("resize", disableTiltEffect);

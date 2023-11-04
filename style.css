@@ -183,15 +183,32 @@ body{
     position: absolute;
     bottom: 0;
     padding: 0px 10px;
-    margin-bottom: 40px;
-    width: 100%;
+    margin-bottom: 0px;
+    width: 97%;
   }
   .div__btn__options button{
     flex: 1;
     width: 33.33%;
   }
   .div__btn__revolver {
-    bottom: 80px;
+    bottom: 60px;
+    margin-bottom: 0px;
+  }
+  .div__botones{
+    gap: 5px;
+    margin-top: 10px;
+  }
+  .scene{
+    margin: 0px;
+  }
+  .copyright{
+    display: none;
+  }
+  .div__manual{
+    padding: 10px 10px;
+  }
+  .btn-download{
+    padding: 12px 20px;
   }
 }
 
@@ -209,6 +226,10 @@ body{
   align-items: center;
   justify-content: center;
   gap: 15px;
+}
+.div__manual a{
+  color: #fff;
+  text-decoration: none;
 }
 
 .gg-software-download {
