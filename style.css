@@ -196,10 +196,13 @@ body{
 }
 
 .div__manual{
+  position: relative;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
+  justify-content: space-between;
+  padding: 10px 30px;
   gap: 15px;
+  background-color: #FBBD2A;
+  z-index: 9;
 }
 .div__manual button{
   display: flex;

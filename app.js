@@ -100,7 +100,10 @@ const imagenes3 = [
     let cards = document.getElementsByClassName('card');
     for (let i = 0; i < cards.length; i++) {
       cards[i].addEventListener("click", () => { 
-        cards[i].classList.toggle('is-flipped');    
+        cards[i].classList.toggle('is-flipped');
+        let index = '.btn__card--'+[i+1]+'--showCard';
+        let btnText = document.querySelector(index);
+        btnText.textContent = (btnText.textContent === "Ver carta")? btnText.textContent = "Ocultar carta": btnText.textContent = "Ver carta"; 
       })
     };
     
