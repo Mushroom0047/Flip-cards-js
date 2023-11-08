@@ -271,3 +271,20 @@ i{
     height: 360px;
   }
 }
+
+@media screen and (max-height: 612px) {
+  .card__face{
+    height: 50vh;
+  }
+  .scene{
+    margin-top: 10px;
+    height: 50vh;
+  }
+  .copyright{
+    display: none;
+  }
+  .div__btn__revolver {
+    bottom: 10px;
+    margin-bottom: 0px;
+  }
+}
